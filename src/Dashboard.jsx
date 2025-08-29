@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
+import { Card } from "./components/ui/card";
+import { Badge } from "./components/ui/badge";
+import { Input } from "./components/ui/input";
 import { Search, MapPin } from "lucide-react";
 
 const BASE_DATA = [
