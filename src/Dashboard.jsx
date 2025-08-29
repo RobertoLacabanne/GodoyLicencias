@@ -1,12 +1,20 @@
 import React, { useMemo, useState } from "react";
-
-const Card = ({ children }) => <div className="border rounded p-4 shadow">{children}</div>;
-const Badge = ({ children }) => <span className="px-2 py-1 text-xs bg-blue-200 rounded">{children}</span>;
-const Input = (props) => <input {...props} className="border p-2 rounded w-full" />;
 import { Search, MapPin } from "lucide-react";
 
+// Componentes básicos en lugar de shadcn/ui
+const Card = ({ children }) => (
+  <div className="border rounded p-4 shadow bg-white">{children}</div>
+);
 
+const Badge = ({ children }) => (
+  <span className="px-2 py-1 text-xs bg-blue-200 text-slate-800 rounded">{children}</span>
+);
 
+const Input = (props) => (
+  <input {...props} className="border p-2 rounded w-full" />
+);
+
+// Datos base
 const BASE_DATA = [
   { start: "2016-01-18", end: "2016-02-06", days: 19, dest: "Brasil (Paso de los Libres)", coverage: "No", coveredDays: 0, types: [], detail: "—", obs: "Viaje terrestre sin licencia.", risk: "Medio" },
   { start: "2016-06-21", end: "2016-08-22", days: 62, dest: "Panamá", coverage: "No", coveredDays: 0, types: [], detail: "—", obs: "Ausencia prolongada sin licencia consignada.", risk: "Alto" },
@@ -28,20 +36,27 @@ const BASE_DATA = [
   { start: "2025-06-02", end: "2025-08-13", days: 72, dest: "Estados Unidos", coverage: "No", coveredDays: 0, types: [], detail: "—", obs: "Ausencia prolongada sin licencia consignada.", risk: "Alto" }
 ];
 
-const fmtDate = (iso) => new Date(iso + "T00:00:00Z").toLocaleDateString("es-AR");
+const fmtDate = (iso) =>
+  new Date(iso + "T00:00:00Z").toLocaleDateString("es-AR");
 
 function ItemCard({ item }) {
   return (
-    <Card className="rounded-2xl shadow-sm border p-4 grid gap-2">
+    <Card>
       <div className="flex items-center justify-between">
-        <div className="text-sm text-slate-700">{fmtDate(item.start)} → {fmtDate(item.end)}</div>
+        <div className="text-sm text-slate-700">
+          {fmtDate(item.start)} → {fmtDate(item.end)}
+        </div>
         <div className="flex gap-2">
-          <Badge variant="outline">{item.coverage}</Badge>
-          <Badge variant="outline">{item.risk}</Badge>
+          <Badge>{item.coverage}</Badge>
+          <Badge>{item.risk}</Badge>
         </div>
       </div>
-      <div className="text-sm text-slate-700"><MapPin className="w-4 h-4 inline"/> {item.dest}</div>
-      <div className="text-xs text-slate-600"><b>Obs:</b> {item.obs}</div>
+      <div className="text-sm text-slate-700">
+        <MapPin className="w-4 h-4 inline" /> {item.dest}
+      </div>
+      <div className="text-xs text-slate-600">
+        <b>Obs:</b> {item.obs}
+      </div>
     </Card>
   );
 }
@@ -49,9 +64,10 @@ function ItemCard({ item }) {
 export default function Dashboard() {
   const [query, setQuery] = useState("");
   const items = useMemo(() => {
-    return BASE_DATA.filter(r =>
-      r.dest.toLowerCase().includes(query.toLowerCase()) ||
-      r.obs.toLowerCase().includes(query.toLowerCase())
+    return BASE_DATA.filter(
+      (r) =>
+        r.dest.toLowerCase().includes(query.toLowerCase()) ||
+        r.obs.toLowerCase().includes(query.toLowerCase())
     );
   }, [query]);
 
@@ -59,11 +75,17 @@ export default function Dashboard() {
     <div className="p-6 max-w-5xl mx-auto grid gap-4">
       <h1 className="text-2xl font-bold">Godoy – Viajes vs Licencias</h1>
       <div className="flex gap-2">
-        <Search className="w-4 h-4 text-slate-500"/>
-        <Input placeholder="Buscar destino u observación..." value={query} onChange={(e) => setQuery(e.target.value)} />
+        <Search className="w-4 h-4 text-slate-500" />
+        <Input
+          placeholder="Buscar destino u observación..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {items.map((it, idx) => <ItemCard key={idx} item={it}/>)}
+        {items.map((it, idx) => (
+          <ItemCard key={idx} item={it} />
+        ))}
       </div>
     </div>
   );
