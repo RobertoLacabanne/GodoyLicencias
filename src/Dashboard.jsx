@@ -1,8 +1,10 @@
 import React, { useMemo, useState } from "react";
+
 import { Card } from "./components/ui/card";
 import { Badge } from "./components/ui/badge";
 import { Input } from "./components/ui/input";
 import { Search, MapPin } from "lucide-react";
+
 
 const BASE_DATA = [
   { start: "2016-01-18", end: "2016-02-06", days: 19, dest: "Brasil (Paso de los Libres)", coverage: "No", coveredDays: 0, types: [], detail: "—", obs: "Viaje terrestre sin licencia.", risk: "Medio" },
