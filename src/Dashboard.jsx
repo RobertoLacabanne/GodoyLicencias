@@ -1,9 +1,10 @@
 import React, { useMemo, useState } from "react";
 
-import { Card } from "./components/ui/card";
-import { Badge } from "./components/ui/badge";
-import { Input } from "./components/ui/input";
+const Card = ({ children }) => <div className="border rounded p-4 shadow">{children}</div>;
+const Badge = ({ children }) => <span className="px-2 py-1 text-xs bg-blue-200 rounded">{children}</span>;
+const Input = (props) => <input {...props} className="border p-2 rounded w-full" />;
 import { Search, MapPin } from "lucide-react";
+
 
 
 const BASE_DATA = [
